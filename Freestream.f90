@@ -7,13 +7,12 @@ Subroutine Freestream
   R_gas	= 287.0 !AIR
   Cp = gamma*R_gas/(gamma - 1)
   r_inf   = 0.5323
-  vMu_inf = 0.0
   Pr_inf = 0.711
 
   ! cM_inf  = 0.5 to be defined in WAG
   ! T_inf   = 362 to be defined in WAG
 
-   Re_L = 1.0 !to be defined in WAG
+   Re_L = 500 !to be defined in WAG
 
   ! P_inf	= r_inf*R_gas*T_inf       !AIR
   ! a_inf   = sqrt(gamma*R_gas*T_inf) to be defined in WAG
