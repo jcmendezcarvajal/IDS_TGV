@@ -23,7 +23,7 @@ implicit none
 
 	do j = 2,Jmax-1
 	do i = 2,Imax-1
-		T_old(i,j) = Pres(i,j)/(0.287*r_inf) ! This is Temperature (Dimensional)
+		T_old(i,j) = Pres(i,j)/(0.287*r_inf*1000) ! This is Temperature (Dimensional)
 	enddo
 	enddo
 
