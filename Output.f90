@@ -126,7 +126,7 @@ Subroutine Output
     ! dividing  delta enthalpy by the enthalpy of the freestream.
 
 
-    allocate (Pres(Imax,Jmax))
+    !allocate (Pres(Imax,Jmax))
     allocate (P_total(Imax,Jmax))
     allocate (T_total(Imax,Jmax))
     allocate (DeltaS(Imax,Jmax))

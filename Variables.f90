@@ -108,6 +108,7 @@ Module variables
     real(kind=dp),dimension(:,:), allocatable :: qflux_wallGlobal, TauGlobal, SkinFrictionGlobal, yplusGlobal
     real(kind=dp)::Max_Vorticity, Max_GradRho,S11,S12,S22,W11,W12,W22,MaxDeltaS, P_TotalFree
     real(kind=dp):: KineticEnergy_Initial, KineticEnergy, PrintFrecuency
+    CHARACTER (len=10)  :: fileout
 
 
 
