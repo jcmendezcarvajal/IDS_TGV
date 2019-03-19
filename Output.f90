@@ -60,7 +60,7 @@ Subroutine Output
     allocate (MachHo(Imax,Jmax))
     allocate (MachVe(Imax,Jmax))
     allocate (Psi(Imax,Jmax))
-    allocate (Vorticity(Imax,Jmax))
+  !  allocate (Vorticity(Imax,Jmax))
 
     !Computing the Mach Number, based on the resultant velocity
     MachRe(:,:)= sqrt((u_old(:,:)*u_inf)**2 + (v_old(:,:)*u_inf)**2)/sqrt(gamma*R_gas*T_old(:,:)*T_inf)
