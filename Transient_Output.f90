@@ -57,16 +57,40 @@ use Variables
 Implicit none
 
 WRITE(fileout,'(f7.5)') (PrintFrecuency)
-NAME = trim('Primitive_Variable')//'_'//trim(fileout)
-open(62,file = trim(NAME)//'.dat', form = 'Unformatted',access = 'stream', status = 'replace')
+NAME = trim('Transient_Primitive')//'_'//trim(fileout)
+
+open(62,file = trim(NAME)//'.dat')
+write(62,*)'  zone T = "zone", I = ',Imax,' J= ',Jmax,' F = point'
+write(62,*) 'TITLE = "Transient Output"'
+write(62,*) 'VARIABLES = "X"'
+write(62,*) '"Y"'
+write(62,*) '"U Velocity"'
+write(62,*) '"V Velocity"'
+write(62,*) '"Temperature"'
+write(62,*) '" Vorticity "'
+
+
+!Computing Vorticity
+do j = 2,Jmax-1
+    do i = 2,Imax-1
+        Vorticity(i,j)	= sqrt(((v_old(i+1,j) - v_old(i-1,j))/(ddx(i)+ddx(i-1)))**2		&
+        + ((u_old(i,j+1) - u_old(i,j-1))/(ddy(j)+ddy(j-1)))**2 )
+    enddo
+enddo
+
+Vorticity(1,   2:Jmax-1)	= Vorticity(Imax-1,     2:Jmax-1)
+Vorticity(Imax,2:Jmax-1)	= Vorticity(2,2:Jmax-1)
+Vorticity(1:Imax, 1    )	= Vorticity(1:Imax, Jmax-1     )
+Vorticity(1:Imax, Jmax )	= Vorticity(1:Imax,  2)
+
 
 do j = 1, Jmax
   do i = 1, Imax
-    write(62) r_old(i,j),u_old(i,j),v_old(i,j),T_old(i,j)
+    write(62,*) x(i,j),y(i,j),u_old(i,j),v_old(i,j),T_old(i,j),Vorticity(i,j)
   enddo
 enddo
 
 close(62)
-PrintFrecuency =  0.01 + PrintFrecuency
+PrintFrecuency =  0.001 + PrintFrecuency
 
 End Subroutine Transient_Primitive
