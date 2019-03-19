@@ -52,22 +52,22 @@ close(131)
 End Subroutine InitialCondition
 
 
-!Subroutine Transient_Primitive
-!use Variables
-!Implicit none
-!
-!WRITE(fileout,'(f7.5)') (PrintFrecuency)
-!NAME = trim('Primitive_Variable')//'_'//trim(fileout)
-!open(62,file = trim(NAME)//'.dat', form = 'Unformatted',access = 'stream', status = 'replace')
-!
-!do j = 1, Jmax
-!  do i = 1, Imax
-!    write(62) r_old(i,j),u_old(i,j),v_old(i,j),T_old(i,j)
-!  enddo
-!enddo
-!
-! close file
-!close(62)
-!PrintFrecuency =  0.01 + PrintFrecuency
-!
-!End Subroutine Transient_Primitive
+Subroutine Transient_Primitive
+use Variables
+Implicit none
+
+WRITE(fileout,'(f7.5)') (PrintFrecuency)
+NAME = trim('Primitive_Variable')//'_'//trim(fileout)
+open(62,file = trim(NAME)//'.dat', form = 'Unformatted',access = 'stream', status = 'replace')
+
+do j = 1, Jmax
+  do i = 1, Imax
+    write(62) r_old(i,j),u_old(i,j),v_old(i,j),T_old(i,j)
+  enddo
+enddo
+
+ close file
+close(62)
+PrintFrecuency =  0.01 + PrintFrecuency
+
+End Subroutine Transient_Primitive
