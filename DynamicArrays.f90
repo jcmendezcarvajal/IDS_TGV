@@ -9,7 +9,7 @@ ALLOCATE(xx(Imax), ddx(Imax))
 ALLOCATE(yy(Jmax), ddy(Jmax))
 ! Set an initial guess for the unknown primitive variables
 ALLOCATE(r_old(Imax,Jmax),u_old(Imax,Jmax),v_old(Imax,Jmax),T_old(Imax,Jmax))
-ALLOCATE(a_old(Imax,Jmax))
+ALLOCATE(a_old(Imax,Jmax),Pres(Imax,Jmax))
 ALLOCATE(r_temp(Imax,Jmax),u_temp(Imax,Jmax),v_temp(Imax,Jmax),T_temp(Imax,Jmax))
 ALLOCATE(r_new(Imax,Jmax),u_new(Imax,Jmax),v_new(Imax,Jmax),T_new(Imax,Jmax))
 ! The Time-flux Vector_U_old
