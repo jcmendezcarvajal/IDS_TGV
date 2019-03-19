@@ -14,7 +14,7 @@ ALLOCATE(r_temp(Imax,Jmax),u_temp(Imax,Jmax),v_temp(Imax,Jmax),T_temp(Imax,Jmax)
 ALLOCATE(r_new(Imax,Jmax),u_new(Imax,Jmax),v_new(Imax,Jmax),T_new(Imax,Jmax))
 ! The Time-flux Vector_U_old
 ALLOCATE(U1_old(Imax,Jmax),U2_old(Imax,Jmax),U3_old(Imax,Jmax),U4_old(Imax,Jmax))
-ALLOCATE(H_old(Imax,Jmax),H_temp(Imax,Jmax))
+ALLOCATE(H_old(Imax,Jmax),H_temp(Imax,Jmax),Vorticity(Imax,Jmax))
 ! Calculate the viscous properties
 ALLOCATE(vMu(Imax,Jmax),tK(Imax,Jmax),vNu(Imax,Jmax))
 ! Calculate the time_step
