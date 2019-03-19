@@ -89,9 +89,9 @@ Subroutine Output
     enddo
 
     Vorticity(1,   2:Jmax-1)	= Vorticity(Imax-1,     2:Jmax-1)
-    Vorticity(Imax,2:Jmax-1)	= Vorticity(1,2:Jmax-1)
+    Vorticity(Imax,2:Jmax-1)	= Vorticity(2,2:Jmax-1)
     Vorticity(1:Imax, 1    )	= Vorticity(1:Imax, Jmax-1     )
-    Vorticity(1:Imax, Jmax )	= Vorticity(1:Imax,  1)
+    Vorticity(1:Imax, Jmax )	= Vorticity(1:Imax,  2)
 
     Max_Vorticity = abs(Vorticity(1,1))
     do j = 1,Jmax
