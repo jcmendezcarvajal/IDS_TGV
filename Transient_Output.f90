@@ -66,7 +66,6 @@ do j = 1, Jmax
   enddo
 enddo
 
- close file
 close(62)
 PrintFrecuency =  0.01 + PrintFrecuency
 
