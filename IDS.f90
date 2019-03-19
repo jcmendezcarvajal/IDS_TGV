@@ -33,8 +33,9 @@ Program IDS
 
   kk = 0
   call Initial_KineticEnergy
-  DO
-    kk= kk + 1
+!  DO
+!    kk= kk + 1
+   do KK = 1,5000
     Call Flux_U
     Call Viscous_Properties
     Call Time_Step
@@ -53,8 +54,9 @@ Program IDS
     Call Derivatives
     Call Update
 
-    write(*,*) kk,eps,(kk*delta_t)
-!    write(32,*) kk,eps
+    If (mod(kk,1000)==0) then
+      write(*,*) kk,eps,(kk*delta_t)
+    endif
     Call Swap
     Call KineticEnergy_Computation
 
@@ -62,15 +64,13 @@ Program IDS
 !    if(((PrintFrecuency-(kk*delta_t))/PrintFrecuency).LT.1.0*10E-2) Call Transient_Primitive
 
   ! Checking Convergence or computational time.
-    if ((kk*delta_t).GE.300) then  !This represents the nondimensional time
+    if ((kk*delta_t).GE.3) then  !This represents the nondimensional time
       exit
     endif
   END DO
 
   Call KillArrays   ! Deallocating the arrays not needed for writting output
-    If (mod(kk,10)==0) then
-        Call Output
-    end if
+  Call Output
   Call Write_SolutionRestart
 
 End Program IDS
