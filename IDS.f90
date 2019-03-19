@@ -18,7 +18,7 @@ Program IDS
   iRestart    = 0
 
   !Settting up the frecuency for the temporal plot
-  PrintFrecuency =  0.01  !Every nondimensional time will be printed the sol.
+  PrintFrecuency =  0.001  !Every nondimensional time will be printed the sol.
 
   if(iRestart.eq.0)then
     Call Grid
@@ -35,7 +35,7 @@ Program IDS
   call Initial_KineticEnergy
 !  DO
 !    kk= kk + 1
-   do KK = 1,5000
+   do KK = 1,50000
     Call Flux_U
     Call Viscous_Properties
     Call Time_Step
