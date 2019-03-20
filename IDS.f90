@@ -54,14 +54,14 @@ Program IDS
     Call Derivatives
     Call Update
 
-    If (mod(kk,1000)==0) then
+!    If (mod(kk,1000)==0) then
       write(*,*) kk,eps,(kk*delta_t)
-    endif
+ !   endif
     Call Swap
     Call KineticEnergy_Computation
 
     ! Time check for temporal plot
-    if(((PrintFrecuency-(kk*delta_t))/PrintFrecuency).LT.1.0*10E-2) Call Transient_Primitive
+!    if(((PrintFrecuency-(kk*delta_t))/PrintFrecuency).LT.1.0*10E-2) Call Transient_Primitive
 
   ! Checking Convergence or computational time.
     if ((kk*delta_t).GE.3) then  !This represents the nondimensional time
