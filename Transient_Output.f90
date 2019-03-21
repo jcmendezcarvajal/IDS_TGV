@@ -68,7 +68,19 @@ write(62,*) '"U Velocity"'
 write(62,*) '"V Velocity"'
 write(62,*) '"Temperature"'
 write(62,*) '" Vorticity "'
+write(62,*) '" Stream Function "'
 write(62,*)'  zone T = "zone", I = ',Imax,' J= ',Jmax,' F = point'
+
+!Computing the stream function variable Psi
+Psi(1,1)    = 0.0
+do j = 2,Jmax
+    Psi(1,j)    = Psi(1,j-1) - u_old(1,j)*ddy(j)
+enddo
+do j = 2, Jmax
+    do i = 2, Imax
+        Psi(i,j)    = Psi(i-1,j) + v_old(i,j)*ddx(i)
+    enddo
+enddo
 
 !Computing Vorticity
 do j = 2,Jmax-1
@@ -86,7 +98,7 @@ Vorticity(1:Imax, Jmax )	= Vorticity(1:Imax,  2)
 
 do j = 1, Jmax
   do i = 1, Imax
-    write(62,*) x(i,j),y(i,j),u_old(i,j),v_old(i,j),T_old(i,j),Vorticity(i,j)
+    write(62,*) x(i,j),y(i,j),u_old(i,j),v_old(i,j),T_old(i,j),Vorticity(i,j),Psi(i,j)
   enddo
 enddo
 
