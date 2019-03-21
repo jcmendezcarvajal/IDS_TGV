@@ -11,9 +11,14 @@ Module variables
 
     ! Freestream Input and calculated variables
     real(kind=dp)::r_inf,u_inf,T_inf,P_inf,vMu_inf,TwTinf,Pr_inf,cM_inf,a_inf
+   
     real(kind=dp)::Re_L,gamma,alpha,T_ref,C_ref,Ce,eps,epsGlobal,R_gas,Cp
     real(kind=dp)::dx,dy, BetaG, Eta
     real(kind=dp)::delta_t,delta_tGlobal,xL,yL, x_actual, Leading_Edge_Gap ,delta, x_min, x_max
+    !For the Anaytical part
+    real(kind=dp),dimension(:,:),allocatable ::  vorticity_exact,psi_exact,u_exact,v_exact 
+    real(kind=dp):: vorticity_inf,psi_inf,vNu_inf
+    
     ! Local Mesh Variables
     real(kind=dp),dimension(:,:),allocatable ::x,y,Re_cell, xDim,yDim
     real(kind=dp),dimension(:), allocatable ::xx, ddx

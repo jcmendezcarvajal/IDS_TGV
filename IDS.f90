@@ -35,7 +35,7 @@ Program IDS
   call Initial_KineticEnergy
 !  DO
 !    kk= kk + 1
-   do KK = 1,50000
+   do KK = 1,10000
     Call Flux_U
     Call Viscous_Properties
     Call Time_Step
@@ -56,7 +56,7 @@ Program IDS
 
 !    If (mod(kk,1000)==0) then
       write(*,*) kk,eps,(kk*delta_t)
- !   endif
+!    endif
     Call Swap
     Call KineticEnergy_Computation
 

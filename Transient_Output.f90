@@ -106,3 +106,51 @@ close(62)
 PrintFrecuency =  0.001 + PrintFrecuency
 
 End Subroutine Transient_Primitive
+
+
+
+
+subroutine Analytical_Solution
+Use variables
+Implicit None
+
+!NonDimensional
+do j = 2,Jmax-1
+    do i = 2,Imax-1
+    
+        vorticity_exact(i,j) = (2.0*SIN(xDim(i,j))*SIN(yDim(i,j))*EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) /vorticity_inf
+        psi_exact(i,j)       = (SIN(xDim(i,j))*SIN(yDim(i,j))    *EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) /psi_inf
+        u_exact(i,j)         = (SIN(xDim(i,j))*COS(yDim(i,j))    *EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) /u_inf 
+        v_exact(i,j)         = (-COS(xDim(i,j))*SIN(yDim(i,j))   *EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) /u_inf
+
+
+    end do
+end do
+
+!Vorticity_exact Boundary
+vorticity_exact(1,   2:Jmax-1)	= vorticity_exact(Imax-1,     2:Jmax-1) !Left wall
+vorticity_exact(Imax,2:Jmax-1)	= vorticity_exact(2,2:Jmax-1)           !Right wall
+vorticity_exact(1:Imax, 1    )	= vorticity_exact(1:Imax, Jmax-1     )  !Bottom Wall
+vorticity_exact(1:Imax, Jmax )	= vorticity_exact(1:Imax,  2)           !Top Wall
+!Psi_exact Boundary
+psi_exact(1,   2:Jmax-1)	= psi_exact(Imax-1,     2:Jmax-1)
+psi_exact(Imax,2:Jmax-1)	= psi_exact(2,2:Jmax-1)
+psi_exact(1:Imax, 1    )	= psi_exact(1:Imax, Jmax-1     )
+psi_exact(1:Imax, Jmax )	= psi_exact(1:Imax,  2)
+!u_exact boundary
+u_exact(1,   2:Jmax-1)	= u_exact(Imax-1,     2:Jmax-1)
+u_exact(Imax,2:Jmax-1)	= u_exact(2,2:Jmax-1)
+u_exact(1:Imax, 1    )	= u_exact(1:Imax, Jmax-1     )
+u_exact(1:Imax, Jmax )	= u_exact(1:Imax,  2)
+!v_exact boundary
+v_exact(1,   2:Jmax-1)	= v_exact(Imax-1,     2:Jmax-1)
+v_exact(Imax,2:Jmax-1)	= v_exact(2,2:Jmax-1)
+v_exact(1:Imax, 1    )	= v_exact(1:Imax, Jmax-1     )
+v_exact(1:Imax, Jmax )	= v_exact(1:Imax,  2)
+
+
+
+end subroutine Analytical_Solution
+
+
+

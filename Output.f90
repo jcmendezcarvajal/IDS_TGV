@@ -11,6 +11,31 @@ Subroutine Output
 
     !!! Computing Cp for postprocessing purposes
     Cp = gamma*R_gas/(gamma-1)
+    
+    
+    !! ****************************************************************************** !!
+    !Printing Analytical Solution
+ 
+    open (113, file = 'Analytical_Solutions.dat')
+    write(113,*) 'TITLE = "Analytical_Solutions"'
+    write(113,*) 'VARIABLES = "X"'
+    write(113,*) '"Y"'
+    write(113,*) '"U Velocity Exact"'
+    write(113,*) '"V Velocity Exact"'
+    write(113,*) '"Vorticity Exact"'
+    write(113,*) '"Stream Function Exact"'
+
+    write(113,*)'  zone T = "zone1", I = ',Imax,' J= ',Jmax,' F = point'
+    
+    do j = 1,Jmax
+        do i = 1,Imax
+            write(113,398) xDim(i,j),yDim(i,j),u_exact(i,j),v_exact(i,j),vorticity_exact(i,j),psi_exact(i,j)
+        enddo
+    enddo
+    close(113)
+
+    
+    
 
     !! ****************************************************************************** !!
     ! Writing the Primitive Variables

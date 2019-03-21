@@ -38,9 +38,25 @@ implicit none
 	enddo
 	enddo
 
-  a_inf   = sqrt(gamma*R_gas*T_inf)
-	cM_inf = u_inf/a_inf
-  vMu_inf = (r_inf*u_inf*x_actual)/Re_L       ! Reynolds number
+    a_inf   = sqrt(gamma*R_gas*T_inf)
+    cM_inf = u_inf/a_inf
+    vMu_inf = (r_inf*u_inf*x_actual)/Re_L       ! Reynolds number
+    vNu_inf= vMu_inf/r_inf                    !Kinematic Viscosity needed for anlytical part
+
+    
+    !parameters at time zero
+    do j = 2,Jmax-1
+    do i = 2,Imax-1
+    
+        vorticity_exact(i,j) = 2.0*SIN(x(i,j))*SIN(y(i,j))
+        psi_exact(i,j)       = SIN(x(i,j))*SIN(y(i,j))   
+        
+    end do
+    end do
+    !Non Dimensional Variabels for Analytical part
+    vorticity_inf = MAXVAL(vorticity_exact(2:Imax-1,2:jmax-1))
+    psi_inf = MAXVAL(psi_exact(2:Imax-1,2:jmax-1))
+
 
 
   Call BC_Supersonic
