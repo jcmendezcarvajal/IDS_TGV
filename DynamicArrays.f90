@@ -4,7 +4,7 @@ use Variables
 Implicit none
 
 ! Variable for geometric references (LOCAL)
-ALLOCATE(x(Imax,Jmax),y(Imax,Jmax))
+ALLOCATE(x(Imax,Jmax),y(Imax,Jmax),xDim(Imax,Jmax),yDim(Imax,Jmax))
 ALLOCATE(xx(Imax), ddx(Imax))
 ALLOCATE(yy(Jmax), ddy(Jmax))
 ! Set an initial guess for the unknown primitive variables
