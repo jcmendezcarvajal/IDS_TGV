@@ -15,7 +15,7 @@ Module variables
     real(kind=dp)::dx,dy, BetaG, Eta
     real(kind=dp)::delta_t,delta_tGlobal,xL,yL, x_actual, Leading_Edge_Gap ,delta, x_min, x_max
     ! Local Mesh Variables
-    real(kind=dp),dimension(:,:),allocatable ::x,y,Re_cell
+    real(kind=dp),dimension(:,:),allocatable ::x,y,Re_cell, xDim,yDim
     real(kind=dp),dimension(:), allocatable ::xx, ddx
     real(kind=dp),dimension(:), allocatable ::yy, ddy
     ! Global Mesh Variables
