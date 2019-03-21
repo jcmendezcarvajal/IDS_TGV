@@ -60,7 +60,7 @@ WRITE(fileout,'(f7.5)') (PrintFrecuency)
 NAME = trim('Transient_Primitive')//'_'//trim(fileout)
 
 open(62,file = trim(NAME)//'.dat')
-write(62,*)'  zone T = "zone", I = ',Imax,' J= ',Jmax,' F = point'
+
 write(62,*) 'TITLE = "Transient Output"'
 write(62,*) 'VARIABLES = "X"'
 write(62,*) '"Y"'
@@ -68,7 +68,7 @@ write(62,*) '"U Velocity"'
 write(62,*) '"V Velocity"'
 write(62,*) '"Temperature"'
 write(62,*) '" Vorticity "'
-
+write(62,*)'  zone T = "zone", I = ',Imax,' J= ',Jmax,' F = point'
 
 !Computing Vorticity
 do j = 2,Jmax-1
