@@ -55,10 +55,11 @@ Program IDS
     Call Update
 
 !    If (mod(kk,1000)==0) then
-      write(*,*) kk,eps,(kk*delta_t)
+!      write(*,*) kk,eps,(kk*delta_t)
 !    endif
     Call Swap
     Call KineticEnergy_Computation
+    call Analytical_Solution
 
     ! Time check for temporal plot
 !    if(((PrintFrecuency-(kk*delta_t))/PrintFrecuency).LT.1.0*10E-2) Call Transient_Primitive
