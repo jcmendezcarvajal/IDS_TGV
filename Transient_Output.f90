@@ -1,40 +1,56 @@
 !This subroutine writes transient files
-Subroutine KineticEnergy_Computation
+Subroutine Enstrophy_Computation
 use Variables
 Implicit none
 
-KineticEnergy = 0.0
+!Computing Vorticity
+do j = 2,Jmax-1
+    do i = 2,Imax-1
+        Vorticity(i,j)	= sqrt(((v_old(i+1,j) - v_old(i-1,j))/(ddx(i)+ddx(i-1)))**2		&
+        + ((u_old(i,j+1) - u_old(i,j-1))/(ddy(j)+ddy(j-1)))**2 )
+    enddo
+enddo
+
+Enstrophy = 0.0
 do j = 2,Jmax-1
 do i = 2,Imax-1
-  KineticEnergy = KineticEnergy + &
-  (1.0/2.0)*(u_old(i,j)**2.0 + v_old(i,j)**2.0)
+  Enstrophy = Enstrophy + &
+  (1.0/2.0)*(Vorticity(i,j)**2 + Vorticity(i,j)**2)
 enddo
 enddo
 
-KineticEnergy = KineticEnergy/((Imax-2)*(Jmax-2))
-KineticEnergy = KineticEnergy/KineticEnergy_Initial
+Enstrophy = Enstrophy/((Imax-2)*(Jmax-2))
+Enstrophy = Enstrophy/Enstrophy_Initial
 
-write(33,*) (kk*delta_t), KineticEnergy
+write(33,*) (kk*delta_t), Enstrophy
 
-End Subroutine KineticEnergy_Computation
+End Subroutine Enstrophy_Computation
 
-Subroutine Initial_KineticEnergy
+Subroutine Initial_Enstrophy
 use Variables
 Implicit none
 ! Computing the initial Kinetic Energy
-KineticEnergy_Initial = 0.0
+Enstrophy_Initial = 0.0
+
+!Computing Vorticity
+do j = 2,Jmax-1
+    do i = 2,Imax-1
+        Vorticity(i,j)	= sqrt(((v_old(i+1,j) - v_old(i-1,j))/(ddx(i)+ddx(i-1)))**2		&
+        + ((u_old(i,j+1) - u_old(i,j-1))/(ddy(j)+ddy(j-1)))**2 )
+    enddo
+enddo
 
 do j = 2,Jmax-1
 do i = 2,Imax-1
-  KineticEnergy_Initial = KineticEnergy_Initial + &
-  (1.0/2.0)*(u_old(i,j)**2.0 + v_old(i,j)**2.0)
+  Enstrophy_Initial = Enstrophy_Initial + &
+  (1.0/2.0)*(Vorticity(i,j)**2 + Vorticity(i,j)**2)
 enddo
 enddo
 
-KineticEnergy_Initial = KineticEnergy_Initial/((Imax-2)*(Jmax-2))
-write(33,*) 0.0, KineticEnergy_Initial/KineticEnergy_Initial
+Enstrophy_Initial = Enstrophy_Initial/((Imax-2)*(Jmax-2))
+write(33,*) 0.0, Enstrophy_Initial/Enstrophy_Initial
 
-End Subroutine Initial_KineticEnergy
+End Subroutine Initial_Enstrophy
 
 Subroutine InitialCondition
 use Variables
@@ -107,50 +123,42 @@ PrintFrecuency =  0.001 + PrintFrecuency
 
 End Subroutine Transient_Primitive
 
-
-
-
 subroutine Analytical_Solution
 Use variables
 Implicit None
 
-
-
-
-
 !Dimensional
 do j = 2,Jmax-1
     do i = 2,Imax-1
-    
-        vorticity_exact(i,j) = (2.0*SIN(xDim(i,j))*SIN(yDim(i,j))*EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) !/vorticity_inf
-        psi_exact(i,j)       = (SIN(xDim(i,j))*SIN(yDim(i,j))    *EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) !/psi_inf
-        u_exact(i,j)         = (SIN(xDim(i,j))*COS(yDim(i,j))    *EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) !/u_inf 
-        v_exact(i,j)         = (-COS(xDim(i,j))*SIN(yDim(i,j))   *EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) !/u_inf
+        vorticity_exact(i,j) = (2.0*SIN(xDim(i,j))*SIN(yDim(i,j))&
+        *EXP(-2.0*(kk*delta_t*(x_actual/u_inf))*vNu(i,j)*vNu_inf))
 
+        psi_exact(i,j)       = (SIN(xDim(i,j))*SIN(yDim(i,j))&
+        *EXP(-2.0*(kk*delta_t*(x_actual/u_inf))*vNu(i,j)*vNu_inf))
 
+        u_exact(i,j)         = (SIN(xDim(i,j))*COS(yDim(i,j))&
+        *EXP(-2.0*(kk*delta_t*(x_actual/u_inf))*vNu(i,j)*vNu_inf))
+
+        v_exact(i,j)         = (-COS(xDim(i,j))*SIN(yDim(i,j))&
+        *EXP(-2.0*(kk*delta_t*(x_actual/u_inf))*vNu(i,j)*vNu_inf))
     end do
 end do
 
 uexact_inf =  MAXVAL(u_exact(2:imax-1,2:Jmax-1))
-!vorticity_inf = MAXVAL(vorticity_exact(2:Imax-1,2:jmax-1))
-!psi_inf = MAXVAL(psi_exact(2:Imax-1,2:jmax-1))
+vorticity_inf = MAXVAL(vorticity_exact(2:Imax-1,2:jmax-1))
+psi_inf = MAXVAL(psi_exact(2:Imax-1,2:jmax-1))
 
 !Non_Dimensional
 	do j = 2,Jmax-1
 	do i = 2,Imax-1
-
 		u_exact(i,j) =  u_exact(i,j)/uexact_inf
 		v_exact(i,j) = 	v_exact(i,j)/uexact_inf
-	    vorticity_exact(i,j) = vorticity_exact(i,j)/vorticity_inf
-        psi_exact(i,j) = psi_exact(i,j)/psi_inf
-        
+	  vorticity_exact(i,j) = vorticity_exact(i,j)/vorticity_inf
+    psi_exact(i,j) = psi_exact(i,j)/psi_inf
 	enddo
 	enddo
 
 
-
-
-    
 !Vorticity_exact Boundary
 vorticity_exact(1,   2:Jmax-1)	= vorticity_exact(Imax-1,     2:Jmax-1) !Left wall
 vorticity_exact(Imax,2:Jmax-1)	= vorticity_exact(2,2:Jmax-1)           !Right wall
@@ -173,38 +181,52 @@ v_exact(1:Imax, 1    )	= v_exact(1:Imax, Jmax-1     )
 v_exact(1:Imax, Jmax )	= v_exact(1:Imax,  2)
 
 
+if(((PrintFrecuency-(kk*delta_t))/PrintFrecuency).LT.1.0*10E-2) then
+
+  WRITE(fileout,'(f7.5)') (PrintFrecuency)
+  NAME = trim('Transient_Properties')//'_'//trim(fileout)
+
+  open(64,file = trim(NAME)//'.dat')
+
+  write(64,*) 'TITLE = "Transient Output"'
+  write(64,*) 'VARIABLES = "X"'
+  write(64,*) '"Y"'
+  write(64,*) '"Vorticity Exact"'
+  write(64,*) '"Psi exact"'
+  write(64,*) '"U exact"'
+  write(64,*) '"V exact "'
+  write(64,*)'  zone T = "zone", I = ',Imax,' J= ',Jmax,' F = point'
+
+  do j = 1, Jmax
+    do i = 1, Imax
+      write(64,*) x(i,j),y(i,j),vorticity_exact(i,j),psi_exact(i,j),u_exact(i,j),v_exact(i,j)
+    enddo
+  enddo
+
+  close(64)
+end if
 
 end subroutine Analytical_Solution
 
-subroutine Error
+Subroutine Error
 
 Use variables
 Implicit None
 !
-do j = 1, Jmax
-    do i= 1, Imax
-    
+do j = 2, Jmax-1
+    do i= 2, Imax-1
         Vor_err(i,j) = ABS(vorticity_exact(i,j)-Vorticity(i,j))
         u_err(i,j)   = ABS(u_exact(i,j)-u_old(i,j))
         v_err(i,j)   = ABS(v_exact(i,j)-v_old(i,j))
-        
-        
     end do
 end do
 
-    Vor_erms = SQRT(SUM(Vor_err**2)/Imax**2)
-    u_erms   = SQRT(SUM(u_err**2)/Imax**2)
-    v_erms   = SQRT(SUM(v_err**2)/Imax**2)
+    Vor_erms = SQRT(SUM(Vor_err(2:imax-1,2:Jmax-1)**2)/(Imax-2)**2)
+    u_erms   = SQRT(SUM(u_err2(2:imax-1,2:Jmax-1)**2)/(Imax-2)**2)
+    v_erms   = SQRT(SUM(v_err2(2:imax-1,2:Jmax-1)**2)/(Imax-2)**2)
 
 !!!!Storing Result
 
-    
-    write(991,*) (kk*delta_t), Vor_erms
-    write(992,*) (kk*delta_t), u_erms
-    write(993,*) (kk*delta_t), v_erms
-    
-
-
+    write(34,*) (kk*delta_t), Vor_erms, u_erms, v_erms
 
 end subroutine Error
-
