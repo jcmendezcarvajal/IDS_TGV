@@ -5,10 +5,9 @@ Program IDS
   use omp_lib
   implicit none
   open(32, file = 'error.dat')
-  open(33, file = 'Total_KineticEnergy.dat')
-  open(991, file = 'Vorticity Error.dat')
-  open(992, file = 'U Velocity Error.dat')
-  open(993, file = 'V Velocity Error.dat')
+  open(33, file = 'Enstrophy.dat')
+  open(34, file = 'TransientPropoerties.dat')
+
 
   ! Initializing the Arrays
   Call InitializeArrays
@@ -34,7 +33,7 @@ Program IDS
   Call InitialCondition
 
   kk = 0
-  call Initial_KineticEnergy
+  call Initial_Enstrophy
 !  DO
 !    kk= kk + 1
    do KK = 1,2000
@@ -60,7 +59,7 @@ Program IDS
       write(*,*) kk,eps,(kk*delta_t)
     endif
     Call Swap
-    Call KineticEnergy_Computation
+    Call Enstrophy_Computation
     CALL Analytical_Solution
     CALL error
 
