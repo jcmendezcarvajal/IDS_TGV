@@ -222,8 +222,8 @@ do j = 2, Jmax-1
 end do
 
     Vor_erms = SQRT(SUM(Vor_err(2:imax-1,2:Jmax-1)**2)/(Imax-2)**2)
-    u_erms   = SQRT(SUM(u_err2(2:imax-1,2:Jmax-1)**2)/(Imax-2)**2)
-    v_erms   = SQRT(SUM(v_err2(2:imax-1,2:Jmax-1)**2)/(Imax-2)**2)
+    u_erms   = SQRT(SUM(u_err(2:imax-1,2:Jmax-1)**2)/(Imax-2)**2)
+    v_erms   = SQRT(SUM(v_err(2:imax-1,2:Jmax-1)**2)/(Imax-2)**2)
 
 !!!!Storing Result
 
