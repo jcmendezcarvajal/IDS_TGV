@@ -2,7 +2,7 @@ Module variables
     Implicit none
     ! Start the Initialization Block
     integer, parameter :: dp = 8
-    INTEGER,PARAMETER::Imax=2001,Jmax=2001
+    INTEGER,PARAMETER::Imax=101,Jmax=101
     INTEGER::I,J,kk, iRestart
     INTEGER:: I_0Q, I_1Q,I_2Q, I_3Q, I_4Q
 
@@ -15,9 +15,15 @@ Module variables
     real(kind=dp)::Re_L,gamma,alpha,T_ref,C_ref,Ce,eps,epsGlobal,R_gas,Cp
     real(kind=dp)::dx,dy, BetaG, Eta
     real(kind=dp)::delta_t,delta_tGlobal,xL,yL, x_actual, Leading_Edge_Gap ,delta, x_min, x_max
+    
+    
     !For the Anaytical part
     real(kind=dp),dimension(:,:),allocatable ::  vorticity_exact,psi_exact,u_exact,v_exact 
-    real(kind=dp):: vorticity_inf,psi_inf,vNu_inf
+    real(kind=dp):: vorticity_inf,psi_inf,vNu_inf,uexact_inf
+    real(kind=dp),dimension(:,:),allocatable :: Vor_err, u_err,v_err
+!    real(kind=dp),dimension(:,:),allocatable :: Vor_erms,u_erms,v_erms
+    real(kind=dp):: Vor_erms,u_erms,v_erms
+    
     
     ! Local Mesh Variables
     real(kind=dp),dimension(:,:),allocatable ::x,y,Re_cell, xDim,yDim

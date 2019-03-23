@@ -114,19 +114,43 @@ subroutine Analytical_Solution
 Use variables
 Implicit None
 
-!NonDimensional
+
+
+
+
+!Dimensional
 do j = 2,Jmax-1
     do i = 2,Imax-1
     
-        vorticity_exact(i,j) = (2.0*SIN(xDim(i,j))*SIN(yDim(i,j))*EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) /vorticity_inf
-        psi_exact(i,j)       = (SIN(xDim(i,j))*SIN(yDim(i,j))    *EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) /psi_inf
-        u_exact(i,j)         = (SIN(xDim(i,j))*COS(yDim(i,j))    *EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) /u_inf 
-        v_exact(i,j)         = (-COS(xDim(i,j))*SIN(yDim(i,j))   *EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) /u_inf
+        vorticity_exact(i,j) = (2.0*SIN(xDim(i,j))*SIN(yDim(i,j))*EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) !/vorticity_inf
+        psi_exact(i,j)       = (SIN(xDim(i,j))*SIN(yDim(i,j))    *EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) !/psi_inf
+        u_exact(i,j)         = (SIN(xDim(i,j))*COS(yDim(i,j))    *EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) !/u_inf 
+        v_exact(i,j)         = (-COS(xDim(i,j))*SIN(yDim(i,j))   *EXP(-2.0*(kk*delta_t)*vNu(i,j)/vNu_inf)) !/u_inf
 
 
     end do
 end do
 
+uexact_inf =  MAXVAL(u_exact(2:imax-1,2:Jmax-1))
+!vorticity_inf = MAXVAL(vorticity_exact(2:Imax-1,2:jmax-1))
+!psi_inf = MAXVAL(psi_exact(2:Imax-1,2:jmax-1))
+
+!Non_Dimensional
+	do j = 2,Jmax-1
+	do i = 2,Imax-1
+
+		u_exact(i,j) =  u_exact(i,j)/uexact_inf
+		v_exact(i,j) = 	v_exact(i,j)/uexact_inf
+	    vorticity_exact(i,j) = vorticity_exact(i,j)/vorticity_inf
+        psi_exact(i,j) = psi_exact(i,j)/psi_inf
+        
+	enddo
+	enddo
+
+
+
+
+    
 !Vorticity_exact Boundary
 vorticity_exact(1,   2:Jmax-1)	= vorticity_exact(Imax-1,     2:Jmax-1) !Left wall
 vorticity_exact(Imax,2:Jmax-1)	= vorticity_exact(2,2:Jmax-1)           !Right wall
@@ -152,5 +176,35 @@ v_exact(1:Imax, Jmax )	= v_exact(1:Imax,  2)
 
 end subroutine Analytical_Solution
 
+subroutine Error
 
+Use variables
+Implicit None
+!
+do j = 1, Jmax
+    do i= 1, Imax
+    
+        Vor_err(i,j) = ABS(vorticity_exact(i,j)-Vorticity(i,j))
+        u_err(i,j)   = ABS(u_exact(i,j)-u_old(i,j))
+        v_err(i,j)   = ABS(v_exact(i,j)-v_old(i,j))
+        
+        
+    end do
+end do
+
+    Vor_erms = SQRT(SUM(Vor_err**2)/Imax**2)
+    u_erms   = SQRT(SUM(u_err**2)/Imax**2)
+    v_erms   = SQRT(SUM(v_err**2)/Imax**2)
+
+!!!!Storing Result
+
+    
+    write(991,*) (kk*delta_t), Vor_erms
+    write(992,*) (kk*delta_t), u_erms
+    write(993,*) (kk*delta_t), v_erms
+    
+
+
+
+end subroutine Error
 

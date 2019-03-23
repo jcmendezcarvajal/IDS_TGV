@@ -9,7 +9,7 @@ implicit none
 ! These are dimensional quantities
 	do j = 2,Jmax-1
 	do i = 2,Imax-1
-    r_old(i,j) = 1.0
+        r_old(i,j) = 1.0
 		u_old(i,j) = SIN(x(i,j))*COS(y(i,j))
 		v_old(i,j) = -COS(x(i,j))*SIN(y(i,j))
 		Pres(i,j) = 101325 + ((COS(2*x(i,j)) + COS(2*y(i,j)))*r_inf/(4.0))*9.80
@@ -31,7 +31,7 @@ implicit none
 
 	do j = 2,Jmax-1
 	do i = 2,Imax-1
-    r_old(i,j) = 1.0
+        r_old(i,j) = 1.0
 		u_old(i,j) =  u_old(i,j)/u_inf
 		v_old(i,j) = 	v_old(i,j)/u_inf
 		T_old(i,j) =  T_old(i,j)/T_inf
@@ -48,12 +48,12 @@ implicit none
     do j = 2,Jmax-1
     do i = 2,Imax-1
     
-        vorticity_exact(i,j) = 2.0*SIN(x(i,j))*SIN(y(i,j))
-        psi_exact(i,j)       = SIN(x(i,j))*SIN(y(i,j))   
+        vorticity_exact(i,j) = 2.0*SIN(xDim(i,j))*SIN(yDim(i,j))
+        psi_exact(i,j)       = SIN(xDim(i,j))*SIN(yDim(i,j))   
         
     end do
     end do
-    !Non Dimensional Variabels for Analytical part
+!!    Non Dimensional Variabels for Analytical part
     vorticity_inf = MAXVAL(vorticity_exact(2:Imax-1,2:jmax-1))
     psi_inf = MAXVAL(psi_exact(2:Imax-1,2:jmax-1))
 

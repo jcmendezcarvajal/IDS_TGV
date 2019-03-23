@@ -29,7 +29,9 @@ Subroutine Output
     
     do j = 1,Jmax
         do i = 1,Imax
-            write(113,398) xDim(i,j),yDim(i,j),u_exact(i,j),v_exact(i,j),vorticity_exact(i,j),psi_exact(i,j)
+!            write(113,398) xDim(i,j),yDim(i,j),u_exact(i,j),v_exact(i,j),vorticity_exact(i,j),psi_exact(i,j)
+            write(113,398) x(i,j),y(i,j),u_exact(i,j),v_exact(i,j),vorticity_exact(i,j),psi_exact(i,j)
+              
         enddo
     enddo
     close(113)

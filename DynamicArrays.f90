@@ -16,7 +16,7 @@ ALLOCATE(r_new(Imax,Jmax),u_new(Imax,Jmax),v_new(Imax,Jmax),T_new(Imax,Jmax))
 !Analytical part
 ALLOCATE(vorticity_exact(Imax,Jmax),psi_exact(Imax,Jmax))
 ALLOCATE(u_exact(Imax,Jmax),v_exact(Imax,Jmax))
-
+ALLOCATE(Vor_err(Imax,Jmax), u_err(Imax,Jmax),v_err(Imax,Jmax))
 
 ! The Time-flux Vector_U_old
 ALLOCATE(U1_old(Imax,Jmax),U2_old(Imax,Jmax),U3_old(Imax,Jmax),U4_old(Imax,Jmax))

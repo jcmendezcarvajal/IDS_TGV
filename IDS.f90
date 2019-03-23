@@ -6,7 +6,9 @@ Program IDS
   implicit none
   open(32, file = 'error.dat')
   open(33, file = 'Total_KineticEnergy.dat')
-
+  open(991, file = 'Vorticity Error.dat')
+  open(992, file = 'U Velocity Error.dat')
+  open(993, file = 'V Velocity Error.dat')
 
   ! Initializing the Arrays
   Call InitializeArrays
@@ -35,7 +37,7 @@ Program IDS
   call Initial_KineticEnergy
 !  DO
 !    kk= kk + 1
-   do KK = 1,10000
+   do KK = 1,2000
     Call Flux_U
     Call Viscous_Properties
     Call Time_Step
@@ -54,18 +56,19 @@ Program IDS
     Call Derivatives
     Call Update
 
-!    If (mod(kk,1000)==0) then
-!      write(*,*) kk,eps,(kk*delta_t)
-!    endif
+    If (mod(kk,1000)==0) then
+      write(*,*) kk,eps,(kk*delta_t)
+    endif
     Call Swap
     Call KineticEnergy_Computation
-    call Analytical_Solution
+    CALL Analytical_Solution
+    CALL error
 
     ! Time check for temporal plot
 !    if(((PrintFrecuency-(kk*delta_t))/PrintFrecuency).LT.1.0*10E-2) Call Transient_Primitive
 
   ! Checking Convergence or computational time.
-    if ((kk*delta_t).GE.3) then  !This represents the nondimensional time
+    if ((kk*delta_t).GE.5) then  !This represents the nondimensional time
       exit
     endif
   END DO
