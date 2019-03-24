@@ -2,12 +2,12 @@ Module variables
     Implicit none
     ! Start the Initialization Block
     integer, parameter :: dp = 8
-    INTEGER,PARAMETER::Imax=101,Jmax=101
+    INTEGER,PARAMETER::Imax=2001,Jmax=2001
     INTEGER::I,J,kk, iRestart
     INTEGER:: I_0Q, I_1Q,I_2Q, I_3Q, I_4Q
 
     !OpenMP Variables
-    INTEGER,PARAMETER :: NumThreads = 32
+    INTEGER,PARAMETER :: NumThreads = 16
 
     ! Freestream Input and calculated variables
     real(kind=dp)::r_inf,u_inf,T_inf,P_inf,vMu_inf,TwTinf,Pr_inf,cM_inf,a_inf
@@ -118,7 +118,7 @@ Module variables
     real(kind=dp),dimension(:,:), allocatable :: qflux_wall, Tau, SkinFriction, Ustar, yplus
     real(kind=dp),dimension(:,:), allocatable :: qflux_wallGlobal, TauGlobal, SkinFrictionGlobal, yplusGlobal
     real(kind=dp)::Max_Vorticity, Max_GradRho,S11,S12,S22,W11,W12,W22,MaxDeltaS, P_TotalFree
-    real(kind=dp):: Enstrophy_Initial, Enstrophy, PrintFrecuency
+    real(kind=dp):: Enstrophy_Initial, Enstrophy, PrintFrecuency, TimeToPrint
     CHARACTER (len=10)  :: fileout
     CHARACTER (len=30)  :: name
 
