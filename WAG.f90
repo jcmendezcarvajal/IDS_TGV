@@ -43,14 +43,15 @@ implicit none
     vMu_inf = (r_inf*u_inf*x_actual)/Re_L       ! Reynolds number
     vNu_inf= vMu_inf/r_inf                    !Kinematic Viscosity needed for anlytical part
 
-    
+    print*, (u_inf*r_inf*dx/vMu_inf)
+
     !parameters at time zero
     do j = 2,Jmax-1
     do i = 2,Imax-1
-    
+
         vorticity_exact(i,j) = 2.0*SIN(xDim(i,j))*SIN(yDim(i,j))
-        psi_exact(i,j)       = SIN(xDim(i,j))*SIN(yDim(i,j))   
-        
+        psi_exact(i,j)       = SIN(xDim(i,j))*SIN(yDim(i,j))
+
     end do
     end do
 !!    Non Dimensional Variabels for Analytical part
