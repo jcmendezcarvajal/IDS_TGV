@@ -11,12 +11,12 @@ Subroutine Output
 
     !!! Computing Cp for postprocessing purposes
     Cp = gamma*R_gas/(gamma-1)
-    
-    
+
+
     !! ****************************************************************************** !!
     !Printing Analytical Solution
- 
-    open (113, file = 'Analytical_Solutions.dat')
+
+    open (113, file = 'Analytical_Solutions_Final.dat')
     write(113,*) 'TITLE = "Analytical_Solutions"'
     write(113,*) 'VARIABLES = "X"'
     write(113,*) '"Y"'
@@ -26,18 +26,16 @@ Subroutine Output
     write(113,*) '"Stream Function Exact"'
 
     write(113,*)'  zone T = "zone1", I = ',Imax,' J= ',Jmax,' F = point'
-    
+
     do j = 1,Jmax
         do i = 1,Imax
-!            write(113,398) xDim(i,j),yDim(i,j),u_exact(i,j),v_exact(i,j),vorticity_exact(i,j),psi_exact(i,j)
             write(113,398) x(i,j),y(i,j),u_exact(i,j),v_exact(i,j),vorticity_exact(i,j),psi_exact(i,j)
-              
         enddo
     enddo
     close(113)
 
-    
-    
+
+
 
     !! ****************************************************************************** !!
     ! Writing the Primitive Variables
@@ -120,12 +118,7 @@ Subroutine Output
     Vorticity(1:Imax, 1    )	= Vorticity(1:Imax, Jmax-1     )
     Vorticity(1:Imax, Jmax )	= Vorticity(1:Imax,  2)
 
-    Max_Vorticity = abs(Vorticity(1,1))
-    do j = 1,Jmax
-        do i = 1,Imax
-            Max_Vorticity = max(Max_Vorticity, abs(Vorticity(i,j)))
-        enddo
-    enddo
+    Max_Vorticity = MAXVAL(Vorticity(2:Imax-1,2:jmax-1))
 
     open(332, file = 'CompoundData_I.dat')
     write(332,*) 'TITLE = "Compound Physics Quantities"'
