@@ -6,8 +6,9 @@ Program IDS
   implicit none
   open(32, file = 'error.dat')
   open(33, file = 'Enstrophy.dat')
-  open(34, file = 'TransientPropoerties.dat')
-
+  open(34, file = 'VorticityRMS.dat')
+  open(35, file = 'U_RMS.dat')
+  open(36, file = 'V_RMS.dat')
 
   ! Initializing the Arrays
   Call InitializeArrays
@@ -19,7 +20,8 @@ Program IDS
   iRestart    = 0
 
   !Settting up the frecuency for the temporal plot
-  PrintFrecuency =  0.001  !Every nondimensional time will be printed the sol.
+  TimeToPrint = 0.001
+  PrintFrecuency =  TimeToPrint  !Every nondimensional time will be printed the sol.
 
   if(iRestart.eq.0)then
     Call Grid
@@ -34,9 +36,14 @@ Program IDS
 
   kk = 0
   call Initial_Enstrophy
+
 !  DO
 !    kk= kk + 1
-   do KK = 1,2000
+   do KK = 1,20
+    Call Enstrophy_Computation
+    CALL Analytical_Solution
+    CALL Error
+
     Call Flux_U
     Call Viscous_Properties
     Call Time_Step
@@ -59,12 +66,9 @@ Program IDS
       write(*,*) kk,eps,(kk*delta_t)
     endif
     Call Swap
-    Call Enstrophy_Computation
-    CALL Analytical_Solution
-    CALL error
 
     ! Time check for temporal plot
-!    if(((PrintFrecuency-(kk*delta_t))/PrintFrecuency).LT.1.0*10E-2) Call Transient_Primitive
+    if(((PrintFrecuency-(kk*delta_t))/PrintFrecuency).LT.1.0*10E-2) Call Transient_Primitive
 
   ! Checking Convergence or computational time.
     if ((kk*delta_t).GE.5) then  !This represents the nondimensional time
