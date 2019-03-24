@@ -11,6 +11,8 @@ do j = 2,Jmax-1
     enddo
 enddo
 
+Max_Vorticity = MAXVAL(Vorticity(2:Imax-1,2:jmax-1))
+
 Enstrophy = 0.0
 do j = 2,Jmax-1
 do i = 2,Imax-1
@@ -106,6 +108,13 @@ do j = 2,Jmax-1
     enddo
 enddo
 
+Max_Vorticity = abs(Vorticity(1,1))
+do j = 1,Jmax
+    do i = 1,Imax
+        Max_Vorticity = max(Max_Vorticity, abs(Vorticity(i,j)))
+    enddo
+enddo
+
 Vorticity(1,   2:Jmax-1)	= Vorticity(Imax-1,     2:Jmax-1)
 Vorticity(Imax,2:Jmax-1)	= Vorticity(2,2:Jmax-1)
 Vorticity(1:Imax, 1    )	= Vorticity(1:Imax, Jmax-1     )
@@ -114,12 +123,12 @@ Vorticity(1:Imax, Jmax )	= Vorticity(1:Imax,  2)
 
 do j = 1, Jmax
   do i = 1, Imax
-    write(62,*) x(i,j),y(i,j),u_old(i,j),v_old(i,j),T_old(i,j),Vorticity(i,j),Psi(i,j)
+    write(62,*) x(i,j),y(i,j),u_old(i,j),v_old(i,j),T_old(i,j),Vorticity(i,j)/Max_Vorticity,Psi(i,j)
   enddo
 enddo
 
 close(62)
-PrintFrecuency =  0.001 + PrintFrecuency
+PrintFrecuency =  TimeToPrint + PrintFrecuency
 
 End Subroutine Transient_Primitive
 
@@ -213,9 +222,10 @@ Subroutine Error
 Use variables
 Implicit None
 !
+
 do j = 2, Jmax-1
     do i= 2, Imax-1
-        Vor_err(i,j) = ABS(vorticity_exact(i,j)-Vorticity(i,j))
+        Vor_err(i,j) = ABS(vorticity_exact(i,j)-Vorticity(i,j)/Max_Vorticity)
         u_err(i,j)   = ABS(u_exact(i,j)-u_old(i,j))
         v_err(i,j)   = ABS(v_exact(i,j)-v_old(i,j))
     end do
@@ -225,8 +235,10 @@ end do
     u_erms   = SQRT(SUM(u_err(2:imax-1,2:Jmax-1)**2)/(Imax-2)**2)
     v_erms   = SQRT(SUM(v_err(2:imax-1,2:Jmax-1)**2)/(Imax-2)**2)
 
-!!!!Storing Result
+    !!!!Storing Result
 
-    write(34,*) (kk*delta_t), Vor_erms, u_erms, v_erms
+    write(34,*) (kk*delta_t), Vor_erms
+    write(35,*) (kk*delta_t), u_erms
+    write(36,*) (kk*delta_t), v_erms
 
 end subroutine Error
