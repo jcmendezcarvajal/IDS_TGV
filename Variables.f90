@@ -2,7 +2,7 @@ Module variables
     Implicit none
     ! Start the Initialization Block
     integer, parameter :: dp = 8
-    INTEGER,PARAMETER::Imax=2001,Jmax=2001
+    INTEGER,PARAMETER::Imax=1001,Jmax=1001
     INTEGER::I,J,kk, iRestart
     INTEGER:: I_0Q, I_1Q,I_2Q, I_3Q, I_4Q
 
