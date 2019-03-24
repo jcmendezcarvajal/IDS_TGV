@@ -4,22 +4,29 @@ use Variables
 Implicit none
 
 !Computing Vorticity
+!$OMP PARALLEL PRIVATE (i,j)
+!$OMP DO
 do j = 2,Jmax-1
     do i = 2,Imax-1
         Vorticity(i,j)	= sqrt(((v_old(i+1,j) - v_old(i-1,j))/(ddx(i)+ddx(i-1)))**2		&
         + ((u_old(i,j+1) - u_old(i,j-1))/(ddy(j)+ddy(j-1)))**2 )
     enddo
 enddo
+!$OMP END DO
+!$OMP END PARALLEL
+
 
 Max_Vorticity = MAXVAL(Vorticity(2:Imax-1,2:jmax-1))
 
 Enstrophy = 0.0
+!$OMP DO REDUCTION(+:Enstrophy)
 do j = 2,Jmax-1
 do i = 2,Imax-1
   Enstrophy = Enstrophy + &
   (1.0/2.0)*(Vorticity(i,j)**2 + Vorticity(i,j)**2)
 enddo
 enddo
+!$OMP END DO
 
 Enstrophy = Enstrophy/((Imax-2)*(Jmax-2))
 Enstrophy = Enstrophy/Enstrophy_Initial
@@ -137,6 +144,8 @@ Use variables
 Implicit None
 
 !Dimensional
+!$OMP PARALLEL PRIVATE (i,j)
+!$OMP DO
 do j = 2,Jmax-1
     do i = 2,Imax-1
         vorticity_exact(i,j) = (2.0*SIN(xDim(i,j))*SIN(yDim(i,j))&
@@ -152,12 +161,16 @@ do j = 2,Jmax-1
         *EXP(-2.0*(kk*delta_t*(x_actual/u_inf))*vNu(i,j)*vNu_inf))
     end do
 end do
+!$OMP END DO
+!$OMP END PARALLEL
 
 uexact_inf =  MAXVAL(u_exact(2:imax-1,2:Jmax-1))
 vorticity_inf = MAXVAL(vorticity_exact(2:Imax-1,2:jmax-1))
 psi_inf = MAXVAL(psi_exact(2:Imax-1,2:jmax-1))
 
 !Non_Dimensional
+!$OMP PARALLEL PRIVATE (i,j)
+!$OMP DO
 	do j = 2,Jmax-1
 	do i = 2,Imax-1
 		u_exact(i,j) =  u_exact(i,j)/uexact_inf
@@ -166,7 +179,8 @@ psi_inf = MAXVAL(psi_exact(2:Imax-1,2:jmax-1))
     psi_exact(i,j) = psi_exact(i,j)/psi_inf
 	enddo
 	enddo
-
+  !$OMP END DO
+  !$OMP END PARALLEL
 
 !Vorticity_exact Boundary
 vorticity_exact(1,   2:Jmax-1)	= vorticity_exact(Imax-1,     2:Jmax-1) !Left wall
@@ -222,7 +236,8 @@ Subroutine Error
 Use variables
 Implicit None
 !
-
+!$OMP PARALLEL PRIVATE (i,j)
+!$OMP DO
 do j = 2, Jmax-1
     do i= 2, Imax-1
         Vor_err(i,j) = ABS(vorticity_exact(i,j)-Vorticity(i,j)/Max_Vorticity)
@@ -230,6 +245,8 @@ do j = 2, Jmax-1
         v_err(i,j)   = ABS(v_exact(i,j)-v_old(i,j))
     end do
 end do
+!$OMP END DO
+!$OMP END PARALLEL
 
     Vor_erms = SQRT(SUM(Vor_err(2:imax-1,2:Jmax-1)**2)/(Imax-2)**2)
     u_erms   = SQRT(SUM(u_err(2:imax-1,2:Jmax-1)**2)/(Imax-2)**2)
