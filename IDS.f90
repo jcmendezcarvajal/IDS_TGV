@@ -38,6 +38,7 @@ Program IDS
   call Initial_Enstrophy
 
   DO
+    kk= kk + 1
     Call Enstrophy_Computation
     CALL Analytical_Solution
     CALL Error
