@@ -20,7 +20,7 @@ Program IDS
   iRestart    = 0
 
   !Settting up the frecuency for the temporal plot
-  TimeToPrint = 0.001
+  TimeToPrint = 5.0
   PrintFrecuency =  TimeToPrint  !Every nondimensional time will be printed the sol.
 
   if(iRestart.eq.0)then
@@ -37,9 +37,7 @@ Program IDS
   kk = 0
   call Initial_Enstrophy
 
-!  DO
-!    kk= kk + 1
-   do KK = 1,20
+  DO
     Call Enstrophy_Computation
     CALL Analytical_Solution
     CALL Error
@@ -71,7 +69,7 @@ Program IDS
     if(((PrintFrecuency-(kk*delta_t))/PrintFrecuency).LT.1.0*10E-2) Call Transient_Primitive
 
   ! Checking Convergence or computational time.
-    if ((kk*delta_t).GE.5) then  !This represents the nondimensional time
+    if ((kk*delta_t).GE.300) then  !This represents the nondimensional time
       exit
     endif
   END DO
