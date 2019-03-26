@@ -20,7 +20,7 @@ Program IDS
   iRestart    = 0
 
   !Settting up the frecuency for the temporal plot
-  TimeToPrint = 1.0
+  TimeToPrint = 5.0
   PrintFrecuency =  TimeToPrint  !Every nondimensional time will be printed the sol.
 
   if(iRestart.eq.0)then
