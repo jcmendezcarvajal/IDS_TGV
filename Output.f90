@@ -118,7 +118,7 @@ Subroutine Output
     Vorticity(1:Imax, 1    )	= Vorticity(1:Imax, Jmax-1     )
     Vorticity(1:Imax, Jmax )	= Vorticity(1:Imax,  2)
 
-    Max_Vorticity = MAXVAL(Vorticity(2:Imax-1,2:jmax-1))
+    Max_Vorticity = MAXVAL(Vorticity(1:Imax,1:jmax))
 
     open(332, file = 'CompoundData_I.dat')
     write(332,*) 'TITLE = "Compound Physics Quantities"'
