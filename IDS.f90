@@ -20,7 +20,7 @@ Program IDS
   iRestart    = 0
 
   !Settting up the frecuency for the temporal plot
-  TimeToPrint = 5.0
+  TimeToPrint = 1.0
   PrintFrecuency =  TimeToPrint  !Every nondimensional time will be printed the sol.
 
   if(iRestart.eq.0)then
@@ -39,9 +39,6 @@ Program IDS
 
   DO
     kk= kk + 1
-    Call Enstrophy_Computation
-    CALL Analytical_Solution
-    CALL Error
 
     Call Flux_U
     Call Viscous_Properties
@@ -66,6 +63,9 @@ Program IDS
     endif
     Call Swap
 
+    Call Enstrophy_Computation
+    CALL Analytical_Solution
+    CALL Error
     ! Time check for temporal plot
     if(((PrintFrecuency-(kk*delta_t))/PrintFrecuency).LT.1.0*10E-2) Call Transient_Primitive
 
