@@ -16,8 +16,8 @@ implicit none
 	enddo
 	enddo
 
-  u_inf = MAXVAL(u_old(2:Imax-1,2:jmax-1)) !Max velocity
-  P_inf = MAXVAL(Pres(2:Imax-1,2:jmax-1)) !Max Pressure
+  u_inf = MAXVAL(u_old(1:Imax,1:jmax)) !Max velocity
+  P_inf = MAXVAL(Pres(1:Imax,1:jmax)) !Max Pressure
 	P_inf = P_inf/1000
 	T_inf = P_inf/(0.287*r_inf)
 
@@ -55,8 +55,8 @@ implicit none
     end do
     end do
 !!    Non Dimensional Variabels for Analytical part
-    vorticity_inf = MAXVAL(vorticity_exact(2:Imax-1,2:jmax-1))
-    psi_inf = MAXVAL(psi_exact(2:Imax-1,2:jmax-1))
+    vorticity_inf = MAXVAL(vorticity_exact(1:Imax,1:jmax))
+    psi_inf = MAXVAL(psi_exact(1:Imax,1:jmax))
 
   Call BC_Supersonic
 
