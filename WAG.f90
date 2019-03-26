@@ -7,8 +7,8 @@ use Variables
 implicit none
 
 ! These are dimensional quantities
-	do j = 2,Jmax-1
-	do i = 2,Imax-1
+	do j = 1,Jmax
+	do i = 1,Imax
         r_old(i,j) = 1.0
 		u_old(i,j) = SIN(x(i,j))*COS(y(i,j))
 		v_old(i,j) = -COS(x(i,j))*SIN(y(i,j))
@@ -21,17 +21,17 @@ implicit none
 	P_inf = P_inf/1000
 	T_inf = P_inf/(0.287*r_inf)
 
-	do j = 2,Jmax-1
-	do i = 2,Imax-1
+	do j = 1,Jmax
+	do i = 1,Imax
 		T_old(i,j) = Pres(i,j)/(0.287*r_inf*1000) ! This is Temperature (Dimensional)
 	enddo
 	enddo
 
   ! This are non dimanional quantities
 
-	do j = 2,Jmax-1
-	do i = 2,Imax-1
-        r_old(i,j) = 1.0
+	do j = 1,Jmax
+	do i = 1,Imax
+    r_old(i,j) = 1.0
 		u_old(i,j) =  u_old(i,j)/u_inf
 		v_old(i,j) = 	v_old(i,j)/u_inf
 		T_old(i,j) =  T_old(i,j)/T_inf
@@ -46,8 +46,8 @@ implicit none
     print*, (u_inf*r_inf*dx/vMu_inf)
 
     !parameters at time zero
-    do j = 2,Jmax-1
-    do i = 2,Imax-1
+    do j = 1,Jmax
+    do i = 1,Imax
 
         vorticity_exact(i,j) = 2.0*SIN(xDim(i,j))*SIN(yDim(i,j))
         psi_exact(i,j)       = SIN(xDim(i,j))*SIN(yDim(i,j))
@@ -57,8 +57,6 @@ implicit none
 !!    Non Dimensional Variabels for Analytical part
     vorticity_inf = MAXVAL(vorticity_exact(2:Imax-1,2:jmax-1))
     psi_inf = MAXVAL(psi_exact(2:Imax-1,2:jmax-1))
-
-
 
   Call BC_Supersonic
 
