@@ -16,7 +16,7 @@ enddo
 !$OMP END PARALLEL
 
 
-Max_Vorticity = MAXVAL(Vorticity(2:Imax-1,2:jmax-1))
+Max_Vorticity = MAXVAL(Vorticity(1:Imax,1:jmax))
 
 Enstrophy = 0.0
 !$OMP DO REDUCTION(+:Enstrophy)
@@ -81,7 +81,7 @@ Subroutine Transient_Primitive
 use Variables
 Implicit none
 
-WRITE(fileout,'(f7.5)') (PrintFrecuency)
+WRITE(fileout,'(f10.5)') (PrintFrecuency)
 NAME = trim('Transient_Primitive')//'_'//trim(fileout)
 
 open(62,file = trim(NAME)//'.dat')
@@ -115,12 +115,7 @@ do j = 2,Jmax-1
     enddo
 enddo
 
-Max_Vorticity = abs(Vorticity(1,1))
-do j = 1,Jmax
-    do i = 1,Imax
-        Max_Vorticity = max(Max_Vorticity, abs(Vorticity(i,j)))
-    enddo
-enddo
+Max_Vorticity = MAXVAL(Vorticity(1:Imax,1:jmax))
 
 Vorticity(1,   2:Jmax-1)	= Vorticity(Imax-1,     2:Jmax-1)
 Vorticity(Imax,2:Jmax-1)	= Vorticity(2,2:Jmax-1)
@@ -206,7 +201,7 @@ v_exact(1:Imax, Jmax )	= v_exact(1:Imax,  2)
 
 if(((PrintFrecuency-(kk*delta_t))/PrintFrecuency).LT.1.0*10E-2) then
 
-  WRITE(fileout,'(f7.5)') (PrintFrecuency)
+  WRITE(fileout,'(f10.5)') (PrintFrecuency)
   NAME = trim('Transient_Properties')//'_'//trim(fileout)
 
   open(64,file = trim(NAME)//'.dat')
