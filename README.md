@@ -1,2 +1,3 @@
 # IDS_TGV
-This repository contains the IDS for viscous flow for the TGV problem
+This repository contains the IDS for viscous flow for the TGV problem.
+It uses OpenMP libraries
