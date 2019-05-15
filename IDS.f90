@@ -18,9 +18,10 @@ Program IDS
 
   Call Freestream
   iRestart    = 0
+  AccumulatedTime = 0.0 ! This will be used to accumulate the time elapsed since dt is not constant
 
   !Settting up the frecuency for the temporal plot
-  TimeToPrint = 5.0
+  TimeToPrint = 0.1
   PrintFrecuency =  TimeToPrint  !Every nondimensional time will be printed the sol.
 
   if(iRestart.eq.0)then
@@ -66,11 +67,14 @@ Program IDS
     Call Enstrophy_Computation
     CALL Analytical_Solution
     CALL Error
+    ! Calculating the accumulated time.
+    AccumulatedTime = AccumulatedTime + delta_t
+    print*, delta_t, AccumulatedTime
     ! Time check for temporal plot
-    if(((PrintFrecuency-(kk*delta_t))/PrintFrecuency).LT.1.0*10E-2) Call Transient_Primitive
+    if(((PrintFrecuency-(AccumulatedTime))/PrintFrecuency).LT.1.0*10E-2) Call Transient_Primitive
 
   ! Checking Convergence or computational time.
-    if ((kk*delta_t).GE.300) then  !This represents the nondimensional time
+    if ((AccumulatedTime).GE.300) then  !This represents the nondimensional time
       exit
     endif
   END DO
