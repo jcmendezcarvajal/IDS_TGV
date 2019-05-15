@@ -2,7 +2,7 @@ Module variables
     Implicit none
     ! Start the Initialization Block
     integer, parameter :: dp = 8
-    INTEGER,PARAMETER::Imax=1001,Jmax=1001
+    INTEGER,PARAMETER::Imax=101,Jmax=101
     INTEGER::I,J,kk, iRestart
     INTEGER:: I_0Q, I_1Q,I_2Q, I_3Q, I_4Q
 
@@ -13,7 +13,7 @@ Module variables
     real(kind=dp)::r_inf,u_inf,T_inf,P_inf,vMu_inf,TwTinf,Pr_inf,cM_inf,a_inf
 
     real(kind=dp)::Re_L,gamma,alpha,T_ref,C_ref,Ce,eps,epsGlobal,R_gas,Cp
-    real(kind=dp)::dx,dy, BetaG, Eta
+    real(kind=dp)::dx,dy, BetaG, Eta, AccumulatedTime
     real(kind=dp)::delta_t,delta_tGlobal,xL,yL, x_actual, Leading_Edge_Gap ,delta, x_min, x_max
 
 
@@ -121,8 +121,6 @@ Module variables
     real(kind=dp):: Enstrophy_Initial, Enstrophy, PrintFrecuency, TimeToPrint
     CHARACTER (len=10)  :: fileout
     CHARACTER (len=30)  :: name
-
-
 
     contains
 
