@@ -132,6 +132,19 @@ enddo
 close(62)
 PrintFrecuency =  TimeToPrint + PrintFrecuency
 
+! Closing and opening the files again, to have access to such files more often.
+
+close(33)
+close(34)
+close(35)
+close(36)
+!Opening the files again
+
+open(33, file = 'Enstrophy.dat',Access = 'append',Status='old')
+open(34, file = 'VorticityRMS.dat',Access = 'append',Status='old')
+open(35, file = 'U_RMS.dat',Access = 'append',Status='old')
+open(36, file = 'V_RMS.dat',Access = 'append',Status='old')
+
 End Subroutine Transient_Primitive
 
 subroutine Analytical_Solution
