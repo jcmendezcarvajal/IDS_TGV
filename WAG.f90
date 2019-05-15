@@ -43,7 +43,7 @@ implicit none
     vMu_inf = (r_inf*u_inf*x_actual)/Re_L       ! Reynolds number
     vNu_inf= vMu_inf/r_inf                    !Kinematic Viscosity needed for anlytical part
 
-    print*, (u_inf*r_inf*dx/vMu_inf)
+    print*, "Pe = ", (u_inf*r_inf*dx/vMu_inf)
 
     !parameters at time zero
     do j = 1,Jmax
