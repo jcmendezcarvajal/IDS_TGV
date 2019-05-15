@@ -36,7 +36,7 @@ Subroutine GridNonDimensional
   ddy(1:Jmax-1)   = yy(2:Jmax) - yy(1:Jmax-1)
   ddy(Jmax)   = ddy(Jmax-1)
 
-  write(*,*) ddx(1), ddy(1)," aspect ratio ...... GOT IT?"
+!  write(*,*) ddx(1), ddy(1)," aspect ratio ...... GOT IT?"
 
 End Subroutine GridNonDimensional
 
@@ -82,5 +82,5 @@ Subroutine Grid
   ddy(1:Jmax-1)   = yy(2:Jmax) - yy(1:Jmax-1)
   ddy(Jmax)   = ddy(Jmax-1)
 
-  write(*,*) ddx(1), ddy(1)," aspect ratio ...... GOT IT?"
+!  write(*,*) ddx(1), ddy(1)," aspect ratio ...... GOT IT?"
 End Subroutine Grid

@@ -16,8 +16,8 @@ implicit none
 	enddo
 	enddo
 
-  u_inf = MAXVAL(u_old(1:Imax,1:jmax)) !Max velocity
-  P_inf = MAXVAL(Pres(1:Imax,1:jmax)) !Max Pressure
+    u_inf = MAXVAL(u_old(1:Imax,1:jmax)) !Max velocity
+    P_inf = MAXVAL(Pres(1:Imax,1:jmax)) !Max Pressure
 	P_inf = P_inf/1000
 	T_inf = P_inf/(0.287*r_inf)
 
