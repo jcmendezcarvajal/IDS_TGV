@@ -12,7 +12,7 @@ implicit none
 	do j = 1,Jmax
 	do i = 1,Imax
  ! Re-defining the IC to avoid sporius values because of round - off
-	T_old(i,j) = (101325/(0.287*r_inf*1000))/T_inf ! This leads to 1.0
+	T_old(i,j) = 1.0 
 	r_old(i,j) = (Pres(i,j)/(0.287*T_inf*1000))/r_inf ! Pressure field.
 	enddo
 	enddo
