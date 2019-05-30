@@ -12,7 +12,7 @@ Subroutine Freestream
   ! cM_inf  = 0.5 to be defined in WAG
   ! T_inf   = 362 to be defined in WAG
 
-   Re_L = 500 !to be defined in WAG
+   Re_L = 5000 !to be defined in WAG
 
   ! P_inf	= r_inf*R_gas*T_inf       !AIR
   ! a_inf   = sqrt(gamma*R_gas*T_inf) to be defined in WAG
