@@ -20,7 +20,7 @@ Subroutine BC_Supersonic_Temp
 
 
   !set the Periodic BC for the horizontal direction
-  do i = 2,Imax-1
+  do i = 1,Imax
     r_temp(i,jmax) = r_temp(i,2)
     u_temp(i,jmax) = u_temp(i,2)
     v_temp(i,jmax) = v_temp(i,2)
