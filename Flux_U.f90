@@ -11,6 +11,9 @@ implicit none
 	!$OMP DO
 	do j = 1,Jmax
 	do i = 1,Imax
+ ! Re-defining the IC to avoid sporius values because of round - off
+	T_old(i,j) = (101325/(0.287*r_inf*1000))/T_inf ! This leads to 1.0
+
 	H_old(i,j) = r_old(i,j)*(T_old(i,j)/alpha +0.5*(u_old(i,j)**2+&
                   v_old(i,j)**2))
 	enddo
@@ -20,6 +23,8 @@ implicit none
 	!$OMP DO
 	do j = 1,Jmax
 	do i = 1,Imax
+	! The same as Temperature above
+	r_old(i,j) = (Pres(i,j)/(0.287*T_inf*1000))/r_inf ! Pressure field.
 	U1_old(i,j) = r_old(i,j)
 	U2_old(i,j) = r_old(i,j)*u_old(i,j)
 	U3_old(i,j) = r_old(i,j)*v_old(i,j)
