@@ -37,7 +37,7 @@ Subroutine GridNonDimensional
   ddy(Jmax)   = ddy(Jmax-1)
 
 !  write(*,*) ddx(1), ddy(1)," aspect ratio ...... GOT IT?"
-
+   print*, "Pe = ", (u_inf*r_inf*dx/vMu_inf)
 End Subroutine GridNonDimensional
 
 Subroutine Grid
@@ -73,14 +73,6 @@ Subroutine Grid
 
     xDim(1:Imax,1:jmax) = x(1:Imax,1:jmax)
     yDim(1:Imax,1:jmax) = y(1:Imax,1:jmax)
-
-
-  !Evaluate the dxi and dyj only
-  ddx(1:Imax-1)   = xx(2:Imax) - xx(1:Imax-1)
-  ddx(Imax)   = ddx(Imax-1)
-
-  ddy(1:Jmax-1)   = yy(2:Jmax) - yy(1:Jmax-1)
-  ddy(Jmax)   = ddy(Jmax-1)
 
 !  write(*,*) ddx(1), ddy(1)," aspect ratio ...... GOT IT?"
 End Subroutine Grid
