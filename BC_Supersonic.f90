@@ -20,7 +20,7 @@ Subroutine BC_Supersonic
 
 
   !set the Periodic BC for the horizontal direction
-  do i = 2,Imax-1
+  do i = 1,Imax
     r_old(i,jmax) = r_old(i,2)
     u_old(i,jmax) = u_old(i,2)
     v_old(i,jmax) = v_old(i,2)
