@@ -66,7 +66,7 @@ do i =2,Imax-1
                      -(F3_inv_d_upper(i,j)-F3_inv_d_lower(i,j))/ddy(j)
 
 	dU4dt_d(i,j) =  -(E4_inv_d_right(i,j)-E4_inv_d_left(i,j))/ddx(i-1) &
-                     -(F4_inv_d_upper(i,j)-F4_inv_d_lower(i,j))/ddy(j) 
+                     -(F4_inv_d_upper(i,j)-F4_inv_d_lower(i,j))/ddy(j)
 Enddo
 Enddo
 !$OMP END DO
@@ -84,8 +84,8 @@ Enddo
  dU3dt(i,j)= 0.25*(dU3dt_a(i,j)+dU3dt_b(i,j)+ &
                       dU3dt_c(i,j)+dU3dt_d(i,j))
 
- dU4dt(i,j)= 0.25*(dU4dt_a(i,j)+dU4dt_b(i,j)+ &
-                       dU4dt_c(i,j)+dU4dt_d(i,j))
+ dU4dt(i,j)= 1.0 !0.25*(dU4dt_a(i,j)+dU4dt_b(i,j)+ &
+                  !   dU4dt_c(i,j)+dU4dt_d(i,j))
 Enddo
 Enddo
 !$OMP END DO
