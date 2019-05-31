@@ -11,7 +11,7 @@ Subroutine Update
       U1_new(i,j) = U1_old(i,j)+dU1dt(i,j)*delta_t
       U2_new(i,j) = U2_old(i,j)+dU2dt(i,j)*delta_t
       U3_new(i,j) = U3_old(i,j)+dU3dt(i,j)*delta_t
-      U4_new(i,j) = U4_old(i,j)+dU4dt(i,j)*delta_t
+      U4_new(i,j) = 1.0 !U4_old(i,j)+dU4dt(i,j)*delta_t
     enddo
   enddo
   !$OMP END DO
@@ -23,8 +23,8 @@ Subroutine Update
       r_new(i,j) = U1_new(i,j)
       u_new(i,j) = U2_new(i,j)/U1_new(i,j)
       v_new(i,j) = U3_new(i,j)/U1_new(i,j)
-      T_new(i,j) = ((U4_new(i,j)/U1_new(i,j))-0.5*(u_new(i,j)**2+ &
-      v_new(i,j)**2))*(gamma*(gamma-1.0)*cM_inf**2)
+      T_new(i,j) = 1.0 !((U4_new(i,j)/U1_new(i,j))-0.5*(u_new(i,j)**2+ &
+      !v_new(i,j)**2))*(gamma*(gamma-1.0)*cM_inf**2)
     enddo
   enddo
   !$OMP END DO
@@ -77,13 +77,13 @@ Subroutine Update
   !$OMP DO
   do j = 2,Jmax-1
     do i = 2,Imax-1
-      H_temp(i,j) = r_temp(i,j)*(T_temp(i,j)/alpha +0.5*(u_temp(i,j)**2+ &
-      v_temp(i,j)**2))
+      H_temp(i,j) = 1.0 !r_temp(i,j)*(T_temp(i,j)/alpha +0.5*(u_temp(i,j)**2+ &
+      !v_temp(i,j)**2))
     enddo
   enddo
   !$OMP END DO
 
-  !This section computes the RMS of the residuals 
+  !This section computes the RMS of the residuals
 
   !$OMP DO
   do j = 2,Jmax-1
