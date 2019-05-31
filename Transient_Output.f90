@@ -161,21 +161,22 @@ Use variables
 Implicit None
 
 !Dimensional
+F = -2.0*((AccumulatedTime*(x_actual/u_inf))*vNu_inf)
 !$OMP PARALLEL PRIVATE (i,j)
 !$OMP DO
 do j = 2,Jmax-1
     do i = 2,Imax-1
-        vorticity_exact(i,j) = (2.0*SIN(xDim(i,j))*SIN(yDim(i,j))&
-        *EXP(-2.0*(AccumulatedTime*(x_actual/u_inf))*vNu(i,j)*vNu_inf))
+        vorticity_exact(i,j) = (2.0*SIN(xDim(i,j))*SIN(yDim(i,j)))&
+        *EXP(F*vNu(i,j))
 
-        psi_exact(i,j)       = (SIN(xDim(i,j))*SIN(yDim(i,j))&
-        *EXP(-2.0*(AccumulatedTime*(x_actual/u_inf))*vNu(i,j)*vNu_inf))
+        psi_exact(i,j)       = (SIN(xDim(i,j))*SIN(yDim(i,j)))&
+        *EXP(F*vNu(i,j))
 
-        u_exact(i,j)         = (SIN(xDim(i,j))*COS(yDim(i,j))&
-        *EXP(-2.0*(AccumulatedTime*(x_actual/u_inf))*vNu(i,j)*vNu_inf))
+        u_exact(i,j)         = (SIN(xDim(i,j))*COS(yDim(i,j)))&
+        *EXP(F*vNu(i,j))
 
-        v_exact(i,j)         = (-COS(xDim(i,j))*SIN(yDim(i,j))&
-        *EXP(-2.0*(AccumulatedTime*(x_actual/u_inf))*vNu(i,j)*vNu_inf))
+        v_exact(i,j)         = (-COS(xDim(i,j))*SIN(yDim(i,j)))&
+        *EXP(F*vNu(i,j))
     end do
 end do
 !$OMP END DO
