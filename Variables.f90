@@ -7,13 +7,13 @@ Module variables
     INTEGER:: I_0Q, I_1Q,I_2Q, I_3Q, I_4Q
 
     !OpenMP Variables
-    INTEGER,PARAMETER :: NumThreads = 12
+    INTEGER,PARAMETER :: NumThreads = 16
 
     ! Freestream Input and calculated variables
     real(kind=dp)::r_inf,u_inf,T_inf,P_inf,vMu_inf,TwTinf,Pr_inf,cM_inf,a_inf
 
     real(kind=dp)::Re_L,gamma,alpha,T_ref,C_ref,Ce,eps,epsGlobal,R_gas,Cp
-    real(kind=dp)::dx,dy, BetaG, Eta, AccumulatedTime
+    real(kind=dp)::dx,dy, BetaG, Eta, AccumulatedTime, F
     real(kind=dp)::delta_t,delta_tGlobal,xL,yL, x_actual, Leading_Edge_Gap ,delta, x_min, x_max
 
 
