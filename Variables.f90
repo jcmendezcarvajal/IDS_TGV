@@ -7,7 +7,7 @@ Module variables
     INTEGER:: I_0Q, I_1Q,I_2Q, I_3Q, I_4Q
 
     !OpenMP Variables
-    INTEGER,PARAMETER :: NumThreads = 16
+    INTEGER,PARAMETER :: NumThreads = 12
 
     ! Freestream Input and calculated variables
     real(kind=dp)::r_inf,u_inf,T_inf,P_inf,vMu_inf,TwTinf,Pr_inf,cM_inf,a_inf
