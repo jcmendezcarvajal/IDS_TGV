@@ -23,7 +23,7 @@ Program IDS
   AccumulatedTime = 0.0 ! This will be used to accumulate the time elapsed since dt is not constant
 
   !Settting up the frecuency for the temporal plot
-  TimeToPrint = 0.1
+  TimeToPrint = 0.2
   PrintFrecuency =  TimeToPrint  !Every nondimensional time will be printed the sol.
 
   if(iRestart.eq.0)then
