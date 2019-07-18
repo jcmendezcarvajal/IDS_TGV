@@ -23,10 +23,10 @@ implicit none
       +(E3_vis_a_right(i,j)+E3_vis_a_left(i,j))/ddx(i-1)      &
       +(F3_vis_a_upper(i,j)+F3_vis_a_lower(i,j))/ddy(j-1)
 
-       dU4dt_a(i,j) =  -(E4_inv_a_right(i,j)-E4_inv_a_left(i,j))/ddx(i-1)      &
-       -(F4_inv_a_upper(i,j)-F4_inv_a_lower(i,j))/ddy(j-1)    &
-       +(E4_vis_a_right(i,j)+E4_vis_a_left(i,j))/ddx(i-1)      &
-       +(F4_vis_a_upper(i,j)+F4_vis_a_lower(i,j))/ddy(j-1)
+    !   dU4dt_a(i,j) =  -(E4_inv_a_right(i,j)-E4_inv_a_left(i,j))/ddx(i-1)      &
+    !   -(F4_inv_a_upper(i,j)-F4_inv_a_lower(i,j))/ddy(j-1)    &
+    !   +(E4_vis_a_right(i,j)+E4_vis_a_left(i,j))/ddx(i-1)      &
+    !   +(F4_vis_a_upper(i,j)+F4_vis_a_lower(i,j))/ddy(j-1)
 
       ! cell(b)
 
@@ -43,10 +43,10 @@ implicit none
       +(E3_vis_b_right(i,j)+E3_vis_b_left(i,j))/ddx(i)        &
       +(F3_vis_b_upper(i,j)+F3_vis_b_lower(i,j))/ddy(j-1)
 
-       dU4dt_b(i,j) =  -(E4_inv_b_right(i,j)-E4_inv_b_left(i,j))/ddx(i)        &
-       -(F4_inv_b_upper(i,j)-F4_inv_b_lower(i,j))/ddy(j-1)    &
-       +(E4_vis_b_right(i,j)+E4_vis_b_left(i,j))/ddx(i)        &
-       +(F4_vis_b_upper(i,j)+F4_vis_b_lower(i,j))/ddy(j-1)
+     !  dU4dt_b(i,j) =  -(E4_inv_b_right(i,j)-E4_inv_b_left(i,j))/ddx(i)        &
+     !  -(F4_inv_b_upper(i,j)-F4_inv_b_lower(i,j))/ddy(j-1)    &
+     !  +(E4_vis_b_right(i,j)+E4_vis_b_left(i,j))/ddx(i)        &
+     !  +(F4_vis_b_upper(i,j)+F4_vis_b_lower(i,j))/ddy(j-1)
 
       ! cell(c)
 
@@ -63,10 +63,10 @@ implicit none
       +(E3_vis_c_right(i,j)+E3_vis_c_left(i,j))/ddx(i) &
       +(F3_vis_c_upper(i,j)+F3_vis_c_lower(i,j))/ddy(j)
 
-       dU4dt_c(i,j) =  -(E4_inv_c_right(i,j)-E4_inv_c_left(i,j))/ddx(i) &
-       -(F4_inv_c_upper(i,j)-F4_inv_c_lower(i,j))/ddy(j) &
-       +(E4_vis_c_right(i,j)+E4_vis_c_left(i,j))/ddx(i) &
-       +(F4_vis_c_upper(i,j)+F4_vis_c_lower(i,j))/ddy(j)
+      ! dU4dt_c(i,j) =  -(E4_inv_c_right(i,j)-E4_inv_c_left(i,j))/ddx(i) &
+      ! -(F4_inv_c_upper(i,j)-F4_inv_c_lower(i,j))/ddy(j) &
+      ! +(E4_vis_c_right(i,j)+E4_vis_c_left(i,j))/ddx(i) &
+      ! +(F4_vis_c_upper(i,j)+F4_vis_c_lower(i,j))/ddy(j)
 
       ! cell(d)
 
@@ -83,10 +83,10 @@ implicit none
       +(E3_vis_d_right(i,j)+E3_vis_d_left(i,j))/ddx(i-1)  &
       +(F3_vis_d_upper(i,j)+F3_vis_d_lower(i,j))/ddy(j)
 
-       dU4dt_d(i,j) =  -(E4_inv_d_right(i,j)-E4_inv_d_left(i,j))/ddx(i-1) &
-       -(F4_inv_d_upper(i,j)-F4_inv_d_lower(i,j))/ddy(j) &
-       +(E4_vis_d_right(i,j)+E4_vis_d_left(i,j))/ddx(i-1) &
-       +(F4_vis_d_upper(i,j)+F4_vis_d_lower(i,j))/ddy(j)
+      ! dU4dt_d(i,j) =  -(E4_inv_d_right(i,j)-E4_inv_d_left(i,j))/ddx(i-1) &
+      ! -(F4_inv_d_upper(i,j)-F4_inv_d_lower(i,j))/ddy(j) &
+      ! +(E4_vis_d_right(i,j)+E4_vis_d_left(i,j))/ddx(i-1) &
+      ! +(F4_vis_d_upper(i,j)+F4_vis_d_lower(i,j))/ddy(j)
     Enddo
   Enddo
 !$OMP END DO
