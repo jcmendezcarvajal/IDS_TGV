@@ -23,7 +23,7 @@ Program IDS
   AccumulatedTime = 0.0 ! This will be used to accumulate the time elapsed since dt is not constant
 
   !Settting up the frecuency for the temporal plot
-  TimeToPrint = 0.0001
+  TimeToPrint = 0.1
   PrintFrecuency =  TimeToPrint  !Every nondimensional time will be printed the sol.
 
   if(iRestart.eq.0)then
@@ -78,7 +78,7 @@ Program IDS
     if(((PrintFrecuency-(AccumulatedTime))/PrintFrecuency).LT.1.0*10E-2) Call Transient_Primitive
 
   ! Checking Convergence or computational time.
-    if ((AccumulatedTime).GE.10.0) then  !This represents the nondimensional time
+    if ((AccumulatedTime).GE.1.0) then  !This represents the nondimensional time
       exit
     endif
   END DO
