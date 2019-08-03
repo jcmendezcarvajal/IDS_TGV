@@ -3,6 +3,8 @@ Subroutine Enstrophy_Computation
 use Variables
 Implicit none
 
+39   format(2(e22.15,2x)) 
+
 !Computing Vorticity
 !$OMP PARALLEL PRIVATE (i,j)
 !$OMP DO
@@ -38,6 +40,9 @@ End Subroutine Enstrophy_Computation
 Subroutine Initial_Enstrophy
 use Variables
 Implicit none
+
+39   format(2(e22.15,2x)) 
+
 ! Computing the initial Enstrophy
 Enstrophy_Initial = 0.0
 
