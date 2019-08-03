@@ -4,6 +4,8 @@ Program IDS
   use Variables
   use omp_lib
   implicit none
+  39   format(2(e22.15,2x)) 
+
   open(32, file = 'error.dat')
   open(33, file = 'Enstrophy.dat')
   open(34, file = 'VorticityRMS.dat')
