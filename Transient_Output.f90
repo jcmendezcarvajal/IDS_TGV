@@ -31,7 +31,7 @@ enddo
 Enstrophy = Enstrophy/((Imax-2)*(Jmax-2))
 Enstrophy = Enstrophy/Enstrophy_Initial
 
-write(33,*) AccumulatedTime, Enstrophy
+write(33,39) AccumulatedTime, Enstrophy
 
 End Subroutine Enstrophy_Computation
 
